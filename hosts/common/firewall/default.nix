@@ -1,6 +1,8 @@
-{ lib,
+{
+  lib,
   config,
-  ... }:
+  ...
+}:
 let
   cfg = config.hosts.common.firewall;
 
@@ -20,9 +22,11 @@ let
   ssh = ''
     # allow ssh
     tcp dport 22 accept
+    tcp dport 2222 accept
   '';
 
-in {
+in
+{
   options.hosts.common.firewall = {
     spotifyLocalDiscovery.enable = lib.mkEnableOption "Open ports to allow for spotify local discover";
     ssh.enable = lib.mkEnableOption "Enable inbound ssh connections";
@@ -76,4 +80,4 @@ in {
       };
     };
   };
- }
+}

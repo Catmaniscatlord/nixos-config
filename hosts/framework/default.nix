@@ -7,12 +7,15 @@
   ];
 
   hosts.common = {
-    bluetooth.enable = true;
-    firewall.spotifyLocalDiscovery.enable = true;
-    fprintd.enable = true;
-    printing.enable = true;
-    regreet.enable = true;
-    sound.enable = true;
+	bluetooth.enable = true;
+		firewall = {
+			spotifyLocalDiscovery.enable = true;
+			ping.enable = true;
+		};
+		fprintd.enable = true;
+		printing.enable = true;
+		regreet.enable = true;
+		sound.enable = true;
   };
 
   networking.hostName = "DavidFramework";

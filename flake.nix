@@ -45,6 +45,10 @@
           ./hosts/framework
           inputs.minegrub-theme.nixosModules.default
         ];
+        Jellybean = mkSystem [
+          ./hosts/homelab
+          inputs.minegrub-theme.nixosModules.default
+	];
       };
     };
 

@@ -1,10 +1,17 @@
 {
+	config,
+	lib,
   displayProfiles,
   ...
 }:
+let
+  cfg = config.modules.wayland;
+in
 {
-  services.kanshi = {
-    enable = true;
-    profiles = displayProfiles;
-  };
+  config = lib.mkIf cfg.enable {
+		services.kanshi = {
+			enable = true;
+			profiles = displayProfiles;
+		};
+	};
 }

@@ -16,13 +16,6 @@
     ./printing.nix
     ./regreet.nix
     ./sound.nix
+		./ssh.nix
 	];
-
-  hosts = {
-    common = {
-      firewall = {
-        ping.enable = true;
-      };
-    };
-  };
 }
