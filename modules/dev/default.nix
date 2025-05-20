@@ -27,5 +27,8 @@ in
       # cat with syntax highlighting
       bat
     ];
+
+    # Automatically load an environment when in a directory
+    programs.direnv.enable = true;
   };
 }
