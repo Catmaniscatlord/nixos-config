@@ -2,6 +2,7 @@
   imports = [
     ./basePackages.nix
     ./boot.nix
+    ./cachix.nix
     ./chromecast.nix
     ./fonts.nix
     ./networking.nix

@@ -25,15 +25,23 @@ let
     tcp dport 2222 accept
   '';
 
+  misc = ''
+    # Misc ports between 8000-9000 for various user services
+    udp dport 8000-9000 accept
+    tcp dport 8000-9000 accept
+  '';
+
 in
 {
   options.hosts.common.firewall = {
     spotifyLocalDiscovery.enable = lib.mkEnableOption "Open ports to allow for spotify local discover";
     ssh.enable = lib.mkEnableOption "Enable inbound ssh connections";
     ping.enable = lib.mkEnableOption "Enable pinging";
+    misc.enable = lib.mkEnableOption "Open up ports 8000-9000 for miscellaneous use";
   };
 
   config.networking = {
+    firewall.enable = false;
     nftables = {
       enable = true;
       tables = {
@@ -60,6 +68,7 @@ in
               ${lib.optionalString cfg.ping.enable ping}
               ${lib.optionalString cfg.spotifyLocalDiscovery.enable spotify}
               ${lib.optionalString cfg.ssh.enable ssh}
+              ${lib.optionalString cfg.misc.enable misc}
 
               # count and drop any other traffic
               drop

@@ -50,6 +50,16 @@
       imports = [
         ../../users/common/base.nix
       ];
+
+      modules = {
+        dev.languages = {
+          python.enable = true;
+          c-cpp.enable = true;
+        };
+
+        terminals.kitty.enable = true;
+      };
+
       home.username = "david";
       home.homeDirectory = "/home/david";
 
