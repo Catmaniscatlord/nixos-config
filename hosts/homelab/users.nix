@@ -36,7 +36,7 @@
     sharedModules = [
       inputs.sops-nix.homeManagerModules.sops
       inputs.nixvim.homeManagerModules.nixvim
-      inputs.stylix.homeManagerModules.stylix
+      inputs.stylix.homeModules.stylix
     ];
 
     useUserPackages = true;
@@ -65,7 +65,7 @@
 
       programs.home-manager.enable = true;
 
-      home.stateVersion = "24.11";
+      home.stateVersion = "25.05";
     };
 
     users.remy = {
@@ -78,7 +78,7 @@
 
       programs.home-manager.enable = true;
 
-      home.stateVersion = "24.11";
+      home.stateVersion = "25.05";
     };
 
     users.root = {
@@ -92,7 +92,7 @@
 
       programs.home-manager.enable = true;
 
-      home.stateVersion = "24.11"; # Current version of NixOS
+      home.stateVersion = "25.05"; # Current version of NixOS
 
       programs.git = {
         enable = true;

@@ -33,7 +33,7 @@ in
         plugins = [ ]; # TODO find good plugins
       };
 
-      initExtra = ''
+      initContent = ''
         nix() {
           if [[ $1 == "develop" ]]; then
             shift

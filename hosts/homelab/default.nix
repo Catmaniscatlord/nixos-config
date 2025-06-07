@@ -7,6 +7,7 @@
   ];
 
   hosts.common = {
+    docker.enable = true;
     ssh.enable = true;
     firewall = {
       ssh.enable = true;
@@ -19,5 +20,5 @@
 
   time.timeZone = "America/Denver";
 
-  system.stateVersion = "24.11";
+  # system.stateVersion = "24.11";
 }

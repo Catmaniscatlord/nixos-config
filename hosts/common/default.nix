@@ -16,5 +16,6 @@
     ./regreet.nix
     ./sound.nix
     ./ssh.nix
+    ./docker.nix
   ];
 }

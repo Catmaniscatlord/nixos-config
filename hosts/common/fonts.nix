@@ -1,22 +1,23 @@
-{	pkgs,
-	... }:
 {
-	# Select internationalisation properties.
-	i18n.defaultLocale = "en_US.UTF-8";
+  pkgs,
+  ...
+}:
+{
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
 
-	fonts = {
-		packages = with pkgs; [
-			(nerdfonts.override { fonts = [ "Hack" ];})
-		];
+  fonts = {
+    packages = with pkgs; [
+      nerd-fonts.hack
+    ];
 
-		fontconfig.defaultFonts = {
-			monospace = [ "Hack" ];
-		};
-	};
+    fontconfig.defaultFonts = {
+      monospace = [ "Hack" ];
+    };
+  };
 
-	console = {
-		font = "Lat2-Terminus16";
-		keyMap = "us";
-	};
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+  };
 }
-
