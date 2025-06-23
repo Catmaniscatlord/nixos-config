@@ -34,8 +34,8 @@
 
   home-manager = {
     sharedModules = [
-      inputs.sops-nix.homeManagerModules.sops
-      inputs.nixvim.homeManagerModules.nixvim
+      inputs.sops-nix.homeModules.sops
+      inputs.nixvim.homeModules.nixvim
       inputs.stylix.homeModules.stylix
     ];
 

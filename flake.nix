@@ -13,7 +13,7 @@
     nixvim.url = "github:nix-community/nixvim/nixos-25.05";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
-    stylix.url = "github:danth/stylix";
+    stylix.url = "github:nix-community/stylix/release-25.05";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
     stylix.inputs.home-manager.follows = "home-manager";
 
