@@ -23,12 +23,6 @@ in
       inlayHints = true;
       servers = lib.mkMerge [
         {
-          ltex = {
-            enable = true;
-            settings = {
-              language = "en-US";
-            };
-          };
           html = {
             enable = true;
           };
@@ -36,9 +30,6 @@ in
             enable = true;
           };
           nil_ls = {
-            enable = true;
-          };
-          ts_ls = {
             enable = true;
           };
           marksman = {
@@ -77,9 +68,15 @@ in
             enable = cfg.python.enable;
           };
         })
-        (lib.mkIf cfg.python.enable {
+        (lib.mkIf cfg.latex.enable {
           texlab = {
             enable = cfg.latex.enable;
+          };
+          ltex = {
+            enable = true;
+            settings = {
+              language = "en-US";
+            };
           };
         })
       ];

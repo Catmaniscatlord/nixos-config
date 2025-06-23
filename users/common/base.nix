@@ -1,15 +1,7 @@
 { ... }:
 {
   imports = [
-    ../../modules/browsers
-    ../../modules/editors
-    ../../modules/games
-    ../../modules/shells
-    ../../modules/dev
-    ../../modules/media
-    ../../modules/social
-    ../../modules/terminals
-    ../../modules/wayland
+    ../../modules
   ];
 
   config = {
