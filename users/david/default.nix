@@ -12,6 +12,11 @@
       c-cpp.enable = true;
     };
 
+    office = {
+      zoom.enable = true;
+      libre.enable = true;
+    };
+
     media.sioyek.enable = true;
   };
 

@@ -96,6 +96,9 @@ in
                 "class<org.pwmt.zathura>" = "";
                 "class<sioyek>" = "";
                 "class<org.prismlauncher.PrismLauncher>" = "";
+                # no zoom icon, so fuck it well use skypes
+                "class<zoom>" = "";
+                "class<^Steam$>" = "";
                 # TODO fix this shit
                 # "[Mm]inecraft.*" = "󰍳";
               };

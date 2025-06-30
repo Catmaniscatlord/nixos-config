@@ -97,7 +97,31 @@ in
           window = {
             border = 3;
             titlebar = false;
-            commands = [ ];
+            commands = [
+              {
+                # Zoom doesn't use the fucking notifications API.
+                # zooms pop up notifications to be floating by default
+                command = "border none, floating enable";
+                criteria = {
+                  class = "zoom";
+                  title = "^zoom$";
+                };
+              }
+              {
+                command = "border pixel, floating enable";
+                criteria = {
+                  class = "zoom";
+                  title = "^(Zoom|About)$";
+                };
+              }
+              {
+                command = "floating enable, floating_minimum_size 960 x 700";
+                criteria = {
+                  class = "zoom";
+                  title = "Settings";
+                };
+              }
+            ];
           };
 
           defaultWorkspace = "1";

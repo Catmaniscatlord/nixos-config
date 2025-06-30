@@ -18,7 +18,7 @@
     cursor = {
       name = "Adwaita";
       package = pkgs.adwaita-icon-theme;
-      size = 24;
+      size = 18;
     };
 
     # These fonts seme fine for now, might override them later if I find better fonts
