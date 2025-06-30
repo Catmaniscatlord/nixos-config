@@ -1,6 +1,6 @@
 {
-	config,
-	lib,
+  config,
+  lib,
   displayProfiles,
   ...
 }:
@@ -9,9 +9,9 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-		services.kanshi = {
-			enable = true;
-			profiles = displayProfiles;
-		};
-	};
+    services.kanshi = {
+      enable = true;
+      settings = [ displayProfiles ];
+    };
+  };
 }

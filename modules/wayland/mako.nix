@@ -17,10 +17,10 @@ in
           anchor = if cfg.sway.enable then "top-right" else "top-right";
           # borderRadius = 8;
           # borderSize = 1;
-          defaultTimeout = 5000;
+          default-timeout = 5000;
           icons = true;
           layer = "overlay";
-          maxVisible = 3;
+          max-visible = 3;
           padding = "10";
           # width = 300;
         };

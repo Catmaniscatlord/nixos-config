@@ -15,6 +15,12 @@
       sha256 = "e3e3980717482daa0f4cae2ccf6d7ba60ba3c78be95ffd856971d6980229a7ed";
     };
 
+    cursor = {
+      name = "Adwaita";
+      package = pkgs.adwaita-icon-theme;
+      size = 24;
+    };
+
     # These fonts seme fine for now, might override them later if I find better fonts
     fonts = {
       serif = {
