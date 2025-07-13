@@ -7,6 +7,7 @@
   ];
 
   hosts.common = {
+    battery_monitor.enable = true;
     bluetooth.enable = true;
     chromecast.enable = true;
     firewall = {
@@ -21,5 +22,6 @@
 
   networking.hostName = "DavidFramework";
 
-  time.timeZone = "America/Denver";
+  # time.timeZone = "America/Denver";
+  services.automatic-timezoned.enable = true;
 }

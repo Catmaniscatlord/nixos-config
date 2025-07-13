@@ -1,6 +1,7 @@
 {
   imports = [
     ./basePackages.nix
+    ./battery_monitor.nix
     ./boot.nix
     ./cachix.nix
     ./chromecast.nix
