@@ -25,6 +25,11 @@ let
     tcp dport 2222 accept
   '';
 
+  dns = ''
+    # allow dns
+    udp dport 53 accept
+  '';
+
   misc = ''
     # Misc ports between 8000-9000 for various user services
     udp dport 8000-9000 accept
@@ -36,8 +41,26 @@ in
   options.hosts.common.firewall = {
     spotifyLocalDiscovery.enable = lib.mkEnableOption "Open ports to allow for spotify local discover";
     ssh.enable = lib.mkEnableOption "Enable inbound ssh connections";
+    dns.enable = lib.mkEnableOption "Enable inbound ssh connections";
     ping.enable = lib.mkEnableOption "Enable pinging";
     misc.enable = lib.mkEnableOption "Open up ports 8000-9000 for miscellaneous use";
+    extraInputConfig = lib.mkOption {
+      type = lib.types.str;
+      default = "";
+      description = "Additional firewall rules";
+    };
+
+    extraOutputConfig = lib.mkOption {
+      type = lib.types.str;
+      default = "";
+      description = "Additional firewall rules";
+    };
+
+    extraForwardConfig = lib.mkOption {
+      type = lib.types.str;
+      default = "";
+      description = "Additional firewall rules";
+    };
   };
 
   config.networking = {
@@ -68,7 +91,9 @@ in
               ${lib.optionalString cfg.ping.enable ping}
               ${lib.optionalString cfg.spotifyLocalDiscovery.enable spotify}
               ${lib.optionalString cfg.ssh.enable ssh}
+              ${lib.optionalString cfg.dns.enable dns}
               ${lib.optionalString cfg.misc.enable misc}
+              ${cfg.extraInputConfig}
 
               # count and drop any other traffic
               drop
@@ -77,11 +102,13 @@ in
             # Allow all outgoing connections.
             chain output {
               type filter hook output priority 0;
+              ${cfg.extraOutputConfig}
               accept
             }
 
             chain forward {
               type filter hook forward priority 0;
+              ${cfg.extraForwardConfig}
               accept
             }
           '';

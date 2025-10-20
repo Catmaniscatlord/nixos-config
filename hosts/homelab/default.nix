@@ -4,6 +4,8 @@
     ../common
     ./hardware-configuration.nix
     ./users.nix
+    ./openvpn.nix
+    ./bind.nix
   ];
 
   hosts.common = {
@@ -13,6 +15,16 @@
       ssh.enable = true;
       ping.enable = true;
       misc.enable = true;
+      dns.enable = true;
+      extraInputConfig = ''
+        udp dport 1194 accept
+
+        iifname tun0 accept
+      '';
+
+      extraForwardConfig = ''
+        iifname "tun0" oifname "tun0" accept
+      '';
     };
   };
 
@@ -20,5 +32,4 @@
 
   time.timeZone = "America/Denver";
 
-  # system.stateVersion = "24.11";
 }

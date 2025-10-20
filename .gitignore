@@ -1,3 +1,5 @@
 .sops.yaml
 result
 *.qcow2
+hosts/homelab/forward-dns.txt
+hosts/homelab/public-ip.txt

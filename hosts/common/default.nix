@@ -2,21 +2,22 @@
   imports = [
     ./basePackages.nix
     ./battery_monitor.nix
+    ./bind.nix
+    ./bluetooth.nix
     ./boot.nix
     ./cachix.nix
     ./chromecast.nix
+    ./docker.nix
+    ./firewall
     ./fonts.nix
+    ./fprintd.nix
     ./networking.nix
     ./nix.nix
     ./nixos.nix
     ./nixpkgs.nix
-    ./bluetooth.nix
-    ./firewall
-    ./fprintd.nix
     ./printing.nix
     ./regreet.nix
     ./sound.nix
     ./ssh.nix
-    ./docker.nix
   ];
 }
