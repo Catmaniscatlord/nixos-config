@@ -22,7 +22,7 @@ in
         cum = {
           master = true;
 
-          allowQuery = [ "10.11.0.0/24" ];
+          allowQuery = [ "10.8.0.0/24" ];
 
           file = pkgs.writeText "zone.cum" ''
             $ORIGIN cum.

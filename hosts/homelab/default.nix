@@ -18,15 +18,12 @@
       dns.enable = true;
       extraInputConfig = ''
         udp dport 1194 accept
-
-        iifname tun0 accept
       '';
 
-      extraForwardConfig = ''
-        iifname "tun0" oifname "tun0" accept
-      '';
     };
   };
+
+  boot.kernelModules = [ "tun" ];
 
   networking.hostName = "Jellybean";
 

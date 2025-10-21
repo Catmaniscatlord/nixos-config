@@ -10,8 +10,8 @@ let
 
   vpnPort = 1194;
   vpnIf = "tun0";
-  vpnSubnet = "10.11.0.0";
-  vpnServerIp = "10.11.0.1";
+  vpnSubnet = "10.8.0.0";
+  vpnServerIp = "10.8.0.1";
 
   pkiDir = "/var/lib/openvpn/pki";
   ccdDir = "/var/lib/openvpn/ccd";
@@ -40,6 +40,7 @@ in
   };
 
   config = {
+
     environment.systemPackages = [
       pkgs.easyrsa
     ];
@@ -47,45 +48,47 @@ in
     services.openvpn = {
 
       clients = {
-        panther.ip = "10.11.0.2";
-        cat.ip = "10.11.0.3";
+        panther.ip = "10.8.0.2";
+        cat.ip = "10.8.0.3";
       };
 
       servers = {
         cum = {
           config = ''
-            client-to-client
-            topology subnet
-
-            port ${toString vpnPort}
-            proto udp
-            dev ${vpnIf}
-
-            # Use a subnet for clients
-            server ${vpnSubnet} 255.255.255.0
-            ifconfig-pool-persist /var/lib/openvpn/ipp.txt
-
-            # Push routes to clients
-            push "dhcp-option DNS ${vpnServerIp}"
-            push "route ${vpnSubnet} 255.255.255.0"
-
-            keepalive 10 120
-            persist-key
-            persist-tun
-
-            cipher AES-256-GCM
-            auth SHA256
-
             # Certificates and keys
             ca ${pkiDir}/pki/ca.crt
             cert ${pkiDir}/pki/issued/server.crt
             key ${pkiDir}/pki/private/server.key
             dh ${pkiDir}/pki/dh.pem
-            tls-auth ${pkiDir}/ta.key 0
-            crl-verify ${pkiDir}/pki/crl.pem
 
-            # ccd-exclusive
+            tls-crypt ${pkiDir}/ta.key
+            # crl-verify ${pkiDir}/pki/crl.pem
+
+            cipher AES-256-GCM
+            auth SHA256
+
+            port ${toString vpnPort}
+            proto udp
+
+            server ${vpnSubnet} 255.255.255.0
+
+            dev ${vpnIf}
+
+            # Use a subnet for clients
+            client-to-client
+            topology subnet
+
+            ccd-exclusive
             client-config-dir ${ccdDir}
+
+            ifconfig-pool-persist /var/lib/openvpn/ipp.txt
+
+            # Push routes to clients
+            push "dhcp-option DNS ${vpnServerIp}"
+
+            keepalive 10 120
+            persist-key
+            persist-tun
           '';
 
           autoStart = true;
@@ -141,11 +144,22 @@ in
 
           if [ ! -f "pki/issued/${name}.crt" ]; then
             ${easyRSA} --batch build-client-full ${name} nopass
-            echo "ifconfig-push ${client.ip}, 255.255.255.0" > ${ccdDir}/${name}
+            echo "ifconfig-push ${client.ip} 255.255.255.0" > ${ccdDir}/${name}
 
             output="${clientsDir}/${name}.ovpn"
             # Header
-            printf 'client\ndev ${vpnIf}\nproto udp\nremote ${public_ip} ${toString vpnPort}\nnobind\npersist-key\npersist-tun\nremote-cert-tls server\ncipher AES-256-GCM\nauth SHA256\nverb 3\n' >> "$output"
+            printf 'client\n' >> "$output"
+            printf 'dev ${vpnIf}\n' >> "$output"
+            printf 'proto udp\n' >> "$output"
+            printf 'remote ${public_ip} ${toString vpnPort}\n' >> "$output"
+            printf 'nobind\n' >> "$output"
+            printf 'persist-key\n' >> "$output"
+            printf 'persist-tun\n' >> "$output"
+            printf 'remote-cert-tls server\n' >> "$output"
+            printf 'cipher AES-256-GCM\n' >> "$output"
+            printf 'auth SHA256\n' >> "$output"
+            printf 'topology subnet\n' >> "$output"
+            printf 'verb 3\n' >> "$output"
 
             # Certificates and keys
             printf '<ca>\n' >> "$output"
@@ -160,9 +174,9 @@ in
             cat "${pkiDir}/pki/private/${name}.key" >> "$output"
             printf '</key>\n' >> "$output"
 
-            printf '<tls-auth>\n' >> "$output"
+            printf '<tls-crypt>\n' >> "$output"
             cat "${pkiDir}/ta.key" >> "$output"
-            printf '</tls-auth>\nkey-direction 1\n' >> "$output"
+            printf '</tls-crypt>\n' >> "$output"
           fi
         '') config.services.openvpn.clients
       );
