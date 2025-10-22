@@ -90,6 +90,13 @@ in
                 "class<google-chrome>" = "󰊯";
                 "class<firefox>" = "";
                 "class<discord>" = "";
+                "class<libreoffice>" = "";
+                "class<libreoffice-math>" = "";
+                "class<libreoffice-draw>" = "";
+                "class<libreoffice-calc>" = "";
+                "class<libreoffice-base>" = "";
+                "class<libreoffice-writer>" = "";
+                "class<libreoffice-impress>" = "";
                 "class<spotify>" = "󰓇";
                 "class<kitty>" = "";
                 # sway supports regex matching. (pretty neat)
