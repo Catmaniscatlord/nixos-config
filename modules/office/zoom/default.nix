@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.modules.shells.zsh;
+  cfg = config.modules.office.zoom;
 in
 {
   options.modules.office = {
