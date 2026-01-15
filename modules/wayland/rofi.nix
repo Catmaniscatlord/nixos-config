@@ -11,7 +11,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.rofi = {
       enable = cfg.enable;
-      package = pkgs.rofi-wayland;
+      # package = pkgs.-wayland;
 
       plugins = with pkgs; [ ];
 

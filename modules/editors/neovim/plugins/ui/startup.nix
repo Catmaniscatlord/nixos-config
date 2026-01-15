@@ -2,12 +2,18 @@
   plugins.startup = {
     enable = true;
 
-    colors = {
-      background = "#ffffff";
-      foldedSection = "#ffffff";
-    };
+    settings = {
 
-    sections = {
+      colors = {
+        background = "#ffffff";
+        folded_section = "#ffffff";
+      };
+
+      parts = [
+        "header"
+        "body"
+      ];
+
       header = {
         type = "text";
         oldfilesDirectory = false;
@@ -38,12 +44,12 @@
         content = [
           [
             " Find File"
-            ''lua Snacks.picker.files()''
+            "lua Snacks.picker.files()"
             "ff"
           ]
           [
             " Find Word"
-            ''lua Snacks.picker.grep()''
+            "lua Snacks.picker.grep()"
             "fr"
           ]
           [
@@ -65,19 +71,17 @@
         highlight = "string";
         defaultColor = "";
         oldfilesAmount = 0;
+
       };
+
+      options = {
+        paddings = [
+          1
+          3
+        ];
+      };
+
     };
 
-    options = {
-      paddings = [
-        1
-        3
-      ];
-    };
-
-    parts = [
-      "header"
-      "body"
-    ];
   };
 }

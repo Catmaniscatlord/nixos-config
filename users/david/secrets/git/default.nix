@@ -1,16 +1,25 @@
 { ... }:
 {
   config = {
-    sops.secrets = builtins.listToAttrs (map (name: {
-      name = name;
-      value.sopsFile = ./git.yaml;
-    }) [ "git/userEmail" "git/userName" ]);
+    sops.secrets = builtins.listToAttrs (
+      map
+        (name: {
+          name = name;
+          value.sopsFile = ./git.yaml;
+        })
+        [
+          "git/userEmail"
+          "git/userName"
+        ]
+    );
 
     programs.git = {
       enable = true;
-      userName = "catmaniscatlord";
-      userEmail = "catmanisacatlord@gmail.com";
-      extraConfig = { 
+      settings = {
+        user = {
+          name = "catmaniscatlord";
+          email = "catmanisacatlord@gmail.com";
+        };
         safe = {
           directory = "/repos/*";
         };

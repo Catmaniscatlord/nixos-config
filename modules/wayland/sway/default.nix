@@ -144,7 +144,8 @@ in
 
           keybindings = lib.mkOptionDefault {
             # rofi: menu
-            "${mod}+d" = "exec ${rofi}/bin/rofi -show drun";
+            "${mod}+d" =
+              "exec ${rofi}/bin/rofi -show drun -monitor \"$(${sway}/bin/swaymsg -t get_outputs | ${lib.getExe jq} '.[] | select(.focused) | .name' -r)\"";
             # rofi: bluetooth
             "${mod}+y" = "exec ${rofi-bluetooth}/bin/rofi-bluetooth";
             # rofi: clipboard manager
@@ -279,6 +280,10 @@ in
           set $clipboard ${cliphist}/bin/cliphist list | ${rofi}/bin/rofi -dmenu | ${cliphist}/bin/cliphist decode | ${wl-clipboard}/bin/wl-copy;
 
           exec ${lib.getExe light} -N 0.01 
+        '';
+
+        extraConfig = ''
+          exec sleep 5; systemctl --user start kanshi.service
         '';
       };
 

@@ -1,9 +1,12 @@
-{ lib,
+{
+  lib,
   config,
-  ... }:
+  ...
+}:
 let
   cfg = config.hosts.common.sound;
-in {
+in
+{
   options.hosts.common.sound = {
     enable = lib.mkEnableOption "Enable sound on the machine, pipewire";
   };
