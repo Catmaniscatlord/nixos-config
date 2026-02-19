@@ -22,6 +22,10 @@
 
   networking.hostName = "DavidFramework";
 
+  boot.binfmt.emulatedSystems = [
+    "riscv64-linux"
+  ];
+
   # time.timeZone = "America/Denver";
   services.automatic-timezoned.enable = true;
 }
