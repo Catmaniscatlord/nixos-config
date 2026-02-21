@@ -17,6 +17,8 @@
     stylix.inputs.nixpkgs.follows = "nixpkgs";
 
     minegrub-theme.url = "github:Lxtharia/minegrub-theme";
+
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
   };
 
   outputs =
@@ -42,9 +44,14 @@
           ./hosts/framework
           inputs.minegrub-theme.nixosModules.default
         ];
+
         Jellybean = mkSystem [
           ./hosts/homelab
           inputs.minegrub-theme.nixosModules.default
+          inputs.nix-minecraft.nixosModules.minecraft-servers
+          {
+            nixpkgs.overlays = [ inputs.nix-minecraft.overlay ];
+          }
         ];
       };
     };

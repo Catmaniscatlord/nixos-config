@@ -12,6 +12,9 @@
     vim
     git
 
+    # terminal things
+    tmux
+
     # filesystem management
     tree
     rename
